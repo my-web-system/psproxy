@@ -11,30 +11,29 @@
 
 typedef void (*PSPExternPluginEntry)(std::string);
 
-class PluginLoadException: public std::exception {
-public:
-    PluginLoadException(const std::string &plugin): _plugin(plugin) {}
+class PluginLoadException : public std::exception {
+ public:
+  PluginLoadException(const std::string &plugin) : _plugin(plugin) {}
 
-    virtual const char *what() const noexcept override
-    {
-        return std::string("Failed to load plugin: " + _plugin).c_str();
-    }
+  virtual const char *what() const noexcept override {
+	return std::string("Failed to load plugin: " + _plugin).c_str();
+  }
 
-private:
-    std::string _plugin;
+ private:
+  std::string _plugin;
 };
 
 class Plugin {
-public:
-    explicit Plugin(const std::string &dllPath);
-    ~Plugin();
+ public:
+  explicit Plugin(const std::string &dllPath);
+  ~Plugin();
 
-    void Run(std::string &message);
+  void Run(std::string &message);
 
-private:
-    // DLL extern function
-    PSPExternPluginEntry _entry;
-    void *_dll;
+ private:
+  // DLL extern function
+  PSPExternPluginEntry _entry;
+  void *_dll;
 };
 
 #endif //PSPROXY_PLUGIN_H

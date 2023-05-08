@@ -4,24 +4,25 @@
 #include "../../includes/tcp/tcp.h"
 #include "../../includes/debug.h"
 
-void Tcp::Send(int fd, const void *buffer, int size)
-{
-    int bytes = send(fd, buffer, (ssize_t)size, 0);
-    if (bytes < 0) {
-        perror("TCP error on send");
-    }
+void Tcp::InitializeSSL() {
 }
 
-std::string &Tcp::Read(int fd)
-{
-    std::string buffer(tcp_buffer_size, 0);
-    std::string value;
-    auto bytes = (ssize_t)buffer.size();
+void Tcp::Send(int fd, const void *buffer, int size) {
+  int bytes = send(fd, buffer, (ssize_t)size, 0);
+  if (bytes < 0) {
+	perror("TCP error on send");
+  }
+}
 
-    while (bytes >= buffer.size()) {
-        bytes = read(fd, &buffer[0], buffer.size());
-        value = value.append(buffer, 0, bytes);
-    }
-    return *(new std::string(value));
+std::string &Tcp::Read(int fd) {
+  std::string buffer(tcp_buffer_size, 0);
+  std::string value;
+  auto bytes = (ssize_t)buffer.size();
+
+  while (bytes >= buffer.size()) {
+	bytes = read(fd, &buffer[0], buffer.size());
+	value = value.append(buffer, 0, bytes);
+  }
+  return *(new std::string(value));
 }
 

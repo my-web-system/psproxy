@@ -10,17 +10,17 @@
 #include "plugin.h"
 
 class Pipeline {
-public:
-    Pipeline();
-    ~Pipeline();
+ public:
+  Pipeline();
+  ~Pipeline();
 
-    void Load();
-    void Load(std::string path);
+  void Load();
+  void Load(std::string path);
 
-    void Run(std::string &message);
+  void Run(std::string &message);
 
-private:
-    std::vector<std::shared_ptr<Plugin>> _pluginChain;
+ private:
+  std::vector<std::shared_ptr<Plugin>> _pluginChain;
 };
 
 #endif //PSPROXY_PIPELINE_H

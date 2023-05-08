@@ -12,34 +12,34 @@
 #include <iostream>
 
 struct LogConfig {
-    std::string level;
+  std::string level;
 };
 
 struct ServerConfig {
-    std::string name;
-    std::string scheme;
-    std::string host;
-    int port;
+  std::string name;
+  std::string scheme;
+  std::string host;
+  int port;
 };
 
 struct PSProxyConfig {
-    LogConfig log;
-    int port;
-    std::vector<ServerConfig> servers;
+  LogConfig log;
+  int port;
+  std::vector<ServerConfig> servers;
 };
 
 class ConfigParser {
-public:
-    explicit ConfigParser(const std::string &configPath);
+ public:
+  explicit ConfigParser(const std::string &configPath);
 
-    ~ConfigParser() = default;
+  ~ConfigParser() = default;
 
-    PSProxyConfig ParseConfigFile();
+  PSProxyConfig ParseConfigFile();
 
-    void PrintConfig(const PSProxyConfig &config);
+  void PrintConfig(const PSProxyConfig &config);
 
-private:
-    std::string _configPath;
+ private:
+  std::string _configPath;
 };
 
 #endif //PSPROXY_CONFIG_PARSER_H

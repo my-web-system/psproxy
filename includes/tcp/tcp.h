@@ -12,13 +12,15 @@
 constexpr int tcp_buffer_size = 1024;
 
 class Tcp {
-public:
-    Tcp() = default;
-    ~Tcp() = default;
+ public:
+  Tcp() = default;
+  ~Tcp() = default;
 
-protected:
-    void Send(int fd, const void *buffer, int size);
-    std::string &Read(int fd);
+ protected:
+  void Send(int fd, const void *buffer, int size);
+  std::string &Read(int fd);
+
+  void InitializeSSL();
 };
 
 #endif //PSPROXY_TCP_H

@@ -8,12 +8,12 @@
 #include "../http/http-message.h"
 
 class IOInterceptorInterface {
-public:
-    IOInterceptorInterface();
-    virtual ~IOInterceptorInterface() = 0;
+ public:
+  IOInterceptorInterface();
+  virtual ~IOInterceptorInterface() = 0;
 
-    virtual void InInterceptor(HTTPMessage http_msg) = 0;
-    virtual void OutInterceptor(HTTPMessage http_msg) = 0;
+  virtual void InInterceptor(HTTPMessage http_msg) = 0;
+  virtual void OutInterceptor(HTTPMessage http_msg) = 0;
 };
 
 #endif //PSPROXY_IOINTERCEPTOR_H

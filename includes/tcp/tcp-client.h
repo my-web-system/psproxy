@@ -13,22 +13,22 @@
 #include "../http/packet.h"
 #include "tcp.h"
 
-class TcpClient: public Tcp {
-public:
-    TcpClient(int port, const std::string &host);
-    ~TcpClient();
+class TcpClient : public Tcp {
+ public:
+  TcpClient(int port, const std::string &host);
+  ~TcpClient();
 
-    // Bind, listen and run
-    void Start();
+  // Bind, listen and run
+  void Start();
 
-    // PSP to server
-    std::shared_ptr<Packet<HTTPResponse>> Forward(const std::shared_ptr<Packet<HTTPRequest>> &packet);
+  // PSP to server
+  std::shared_ptr<Packet<HTTPResponse>> Forward(const std::shared_ptr<Packet<HTTPRequest>> &packet);
 
-private:
-    int _socket_fd;
-    sockaddr_in _addr;
-    int _port;
-    std::string _host;
+ private:
+  int _socket_fd;
+  sockaddr_in _addr;
+  int _port;
+  std::string _host;
 };
 
 #endif //PSPROXY_TCP_CLIENT_H

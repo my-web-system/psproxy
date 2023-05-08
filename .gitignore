@@ -12,3 +12,4 @@ _deps
 cmake-build-debug
 libs
 dummy-clients/node/node_modules
+.idea

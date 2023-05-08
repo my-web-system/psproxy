@@ -10,21 +10,21 @@
 #include "../http/packet.h"
 #include "tcp.h"
 
-class TcpServer: public Tcp {
-public:
-    explicit TcpServer(int port);
-    ~TcpServer();
+class TcpServer : public Tcp {
+ public:
+  explicit TcpServer(int port);
+  ~TcpServer();
 
-    void Bind();
-    void Listen();
-    std::shared_ptr<Packet<HTTPRequest>> Accept();
-    void Close();
+  void Bind();
+  void Listen();
+  std::shared_ptr<Packet<HTTPRequest>> Accept();
+  void Close();
 
-private:
-    int _socket_fd;
-    sockaddr_in _addr;
+ private:
+  int _socket_fd;
+  sockaddr_in _addr;
 
-    int _opt = 1;
+  int _opt = 1;
 
 };
 

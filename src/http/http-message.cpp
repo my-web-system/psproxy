@@ -6,8 +6,7 @@
 #include "../../includes/http/http-message.h"
 #include <boost/beast.hpp>
 
-HTTPRequest::HTTPRequest(std::string &buffer) : HTTPMessage()
-{
+HTTPRequest::HTTPRequest(std::string &buffer) : HTTPMessage() {
     boost::beast::error_code error;
     boost::beast::http::parser<true, boost::beast::http::string_body> parser;
     parser.put(boost::asio::buffer(buffer), error);
@@ -33,8 +32,7 @@ std::string HTTPRequest::toBuffer() {
            + _body;
 }
 
-HTTPResponse::HTTPResponse(std::string &buffer): HTTPMessage()
-{
+HTTPResponse::HTTPResponse(std::string &buffer) : HTTPMessage() {
     boost::beast::error_code error;
     boost::beast::http::parser<false, boost::beast::http::string_body> parser;
     parser.eager(true); // force boost to parse all message, required to parse body
