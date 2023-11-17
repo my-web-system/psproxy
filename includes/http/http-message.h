@@ -7,6 +7,7 @@
 
 #include <string>
 #include <map>
+#include "uri.h"
 
 typedef std::map<std::string, std::string> HTTPHeaders;
 
@@ -48,7 +49,7 @@ class HTTPRequest : public HTTPMessage {
   std::string toBuffer() override;
 
   std::string _method;
-  std::string _uri;
+  Uri _uri;
 };
 
 class HTTPResponse : public HTTPMessage {

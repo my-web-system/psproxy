@@ -6,6 +6,7 @@
 #define PSPROXY_DEBUG_H
 
 #include <iostream>
+#include <sstream>
 #include <iomanip>
 
 /* FOREGROUND */

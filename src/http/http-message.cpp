@@ -16,17 +16,17 @@ HTTPRequest::HTTPRequest(std::string &buffer) : HTTPMessage() {
     unsigned major = condensedVersion / 10;
     unsigned minor = condensedVersion % 10;
     _version = std::to_string(major) + "." + std::to_string(minor);
-    _method = to_string(parser.get().method()).to_string();
+    _method = to_string(parser.get().method());
     for (auto &header: parser.get().base()) {
         _headers.insert(std::pair<std::string, std::string>(header.name_string(), header.value()));
     }
     _body = parser.get().body();
-    _uri = parser.get().target().to_string();
+    _uri = Uri(parser.get().target());
 }
 
 std::string HTTPRequest::toBuffer() {
     std::string crlf = "\r\n";
-    return _method + " " + _uri + " " + "HTTP/" + _version + crlf
+    return _method + " " + _uri.getProxyRedirectionUri() + " " + "HTTP/" + _version + crlf
            + this->getFlatHeaders()
            + crlf
            + _body;
@@ -48,7 +48,7 @@ HTTPResponse::HTTPResponse(std::string &buffer) : HTTPMessage() {
     }
     _body = parser.get().body();
     _status = parser.get().result_int();
-    _reason = parser.get().reason().to_string();
+    _reason = parser.get().reason();
 }
 
 std::string HTTPResponse::toBuffer() {

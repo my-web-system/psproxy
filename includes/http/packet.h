@@ -9,6 +9,9 @@
 #include "http-message.h"
 #include "../config/config.h"
 #include <boost/algorithm/string/replace.hpp>
+#include <boost/algorithm/string.hpp>
+#include <boost/range/adaptor/indexed.hpp>
+
 
 template<typename T>
 class Packet {
@@ -30,15 +33,19 @@ class Packet {
 	auto request = static_cast<HTTPRequest *>(this->_http);
 
 	for (const auto &server : config.servers) {
-	  if (request->_uri.find(server.name) != std::string::npos) {
+	  if (request->_uri.getUri().find(server.name) != std::string::npos) {
 		// resolver match
 		_target = server;
 
 		// Potentially modify packet _uri
 		// GET /bpc/hello
 		// become: GET /hello (psp redirects to /bpc server configured in yaml)
-		std::string token = "/" + server.name;
-		boost::replace_first(request->_uri, token, "");
+        // /bpc -> /
+        // /bpc/ -> /
+        // /bpc/hello -> /hello
+        // TODO needs proper testing (not secure enough)
+        request->_uri.buildProxyRedirectionUri(server.name);
+        std::cout << request->_uri << std::endl;
 		return;
 	  }
 	}

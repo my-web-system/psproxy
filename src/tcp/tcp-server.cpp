@@ -19,7 +19,7 @@ TcpServer::TcpServer(int port) {
   _addr.sin_family = AF_INET;
   _addr.sin_addr.s_addr = INADDR_ANY;
   _addr.sin_port = htons(port);
-  if (setsockopt(_socket_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &_opt, sizeof(_opt)) < 0) {
+  if (setsockopt(_socket_fd, SOL_SOCKET, SO_REUSEADDR, &_opt, sizeof(_opt)) < 0) {
 	perror("psp server socket configuration failed");
 	exit(1);
   }

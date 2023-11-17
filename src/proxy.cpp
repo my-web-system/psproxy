@@ -54,7 +54,11 @@ void Proxy::Start() {
 	try {
 	  // Resolves host/port through config (using HTTPRequest _uri)
 	  packet->resolve();
-	} catch (const std::runtime_error &e) {
+	}  catch (const UriException &e) {
+        Debug::Print(e.what(), Debug::Level::ERR);
+        // downward HTTP exception
+
+    } catch (const std::runtime_error &e) {
 	  Debug::Print(e.what(), Debug::Level::ERR);
 	  continue;
 	} catch (const std::exception &e) {
